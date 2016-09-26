@@ -1,25 +1,25 @@
 
 @font-face {
-    font-family: 'Merriweather';
-    src: local("Merriweather Light");
+    font-family: 'Avenir';
+    src: local("Avenir-Medium");
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
-    font-family: 'Merriweather';
-    src: local("Merriweather-Italic");
+    font-family: 'Avenir';
+    src: local("Avenir-MediumOblique");
     font-weight: normal;
     font-style: italic;
 }
 @font-face {
-    font-family: 'Merriweather';
-    src: local("Merriweather-Bold");
+    font-family: 'Avenir';
+    src: local("Avenir-Black");
     font-weight: bold;
     font-style: normal;
 }
 @font-face {
-    font-family: 'Merriweather';
-    src: local("Merriweather-BoldItalic");
+    font-family: 'Avenir';
+    src: local("Avenir-BlackOblique");
     font-weight: bold;
     font-style: italic;
 }
@@ -36,14 +36,14 @@ html {
 
 html, body {
     margin:0;
-    font-family:'Merriweather', sans-serif;
+    font-family:'Avenir', sans-serif;
     font-size:1em;
     color:#2D2D2D;
 }
 
 body {
-    padding-left:10px;
-    padding-right:10px;
+    padding-left:4px;
+    padding-right:4px;
     padding-top: 0px;
     padding-bottom: 0px;
     overflow-y: auto;
@@ -378,7 +378,7 @@ div.field[placeholderText][contenteditable=true]:empty:focus:before {
 }
 
 #zss_field_title, #zss_field_title p {
-    font-family:'Merriweather', serif;
+    font-family:'Avenir', serif;
     font-weight: bold;
     font-size: 24px;
     line-height: 32px;
@@ -387,7 +387,7 @@ div.field[placeholderText][contenteditable=true]:empty:focus:before {
 
 #zss_field_content {
     margin-bottom: 10px;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 24px;
 }
 

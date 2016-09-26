@@ -15,11 +15,11 @@ static NSString* const kDefaultCallbackParameterComponentSeparator = @"=";
 static NSString* const kWPEditorViewFieldTitleId = @"zss_field_title";
 static NSString* const kWPEditorViewFieldContentId = @"zss_field_content";
 
-static const CGFloat UITextFieldLeftRightInset = 20.0;
-static const CGFloat UITextFieldFieldHeight = 55.0;
-static const CGFloat SourceTitleTextFieldYOffset = 4.0;
-static const CGFloat HTMLViewTopInset = 15.0;
-static const CGFloat HTMLViewLeftRightInset = 15.0;
+static const CGFloat UITextFieldLeftRightInset = 0.0;
+static const CGFloat UITextFieldFieldHeight = 0.0;
+static const CGFloat SourceTitleTextFieldYOffset = 0.0;
+static const CGFloat HTMLViewTopInset = 3.0;
+static const CGFloat HTMLViewLeftRightInset = 5.0;
 
 static NSString* const WPEditorViewWebViewContentSizeKey = @"contentSize";
 
@@ -75,12 +75,12 @@ static NSString* const WPEditorViewWebViewContentSizeKey = @"contentSize";
 		CGRect childFrame = frame;
 		childFrame.origin = CGPointZero;
 		
-        [self createSourceTitleViewWithFrame: childFrame];
-        [self createSourceDividerViewWithFrame:CGRectMake(0.0f, CGRectGetMaxY(self.sourceViewTitleField.frame), CGRectGetWidth(childFrame), 1.0f)];
+//        [self createSourceTitleViewWithFrame: childFrame];
+//        [self createSourceDividerViewWithFrame:CGRectMake(0.0f, CGRectGetMaxY(self.sourceViewTitleField.frame), CGRectGetWidth(childFrame), 1.0f)];
         CGRect sourceViewFrame = CGRectMake(0.0f,
-                                            CGRectGetMaxY(self.sourceContentDividerView.frame),
+                                            0,
                                             CGRectGetWidth(childFrame),
-                                            CGRectGetHeight(childFrame)-CGRectGetHeight(self.sourceViewTitleField.frame)-CGRectGetHeight(self.sourceContentDividerView.frame));
+                                            CGRectGetHeight(childFrame));
         
         [self createSourceViewWithFrame:sourceViewFrame];
 		[self createWebViewWithFrame:childFrame];
@@ -106,32 +106,32 @@ static NSString* const WPEditorViewWebViewContentSizeKey = @"contentSize";
 {
     NSAssert(!_sourceViewTitleField, @"The source view title field must not exist when this method is called!");	
 
-    CGRect titleFrame;
-    CGFloat textWidth = CGRectGetWidth(frame) - (2 * UITextFieldLeftRightInset);
-    titleFrame = CGRectMake(UITextFieldLeftRightInset, SourceTitleTextFieldYOffset, textWidth, UITextFieldFieldHeight);
-    _sourceViewTitleField = [[UITextField alloc] initWithFrame:titleFrame];
-    _sourceViewTitleField.hidden = YES;
-    _sourceViewTitleField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    _sourceViewTitleField.autocorrectionType = UITextAutocorrectionTypeDefault;
-    _sourceViewTitleField.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
-    _sourceViewTitleField.delegate = self;
-    _sourceViewTitleField.accessibilityLabel = NSLocalizedString(@"Title", @"Post title");
-    _sourceViewTitleField.returnKeyType = UIReturnKeyNext;
-    [self addSubview:_sourceViewTitleField];
-	[self startObservingTitleFieldChanges];
+//    CGRect titleFrame;
+//    CGFloat textWidth = CGRectGetWidth(frame) - (2 * UITextFieldLeftRightInset);
+//    titleFrame = CGRectMake(UITextFieldLeftRightInset, SourceTitleTextFieldYOffset, textWidth, UITextFieldFieldHeight);
+//    _sourceViewTitleField = [[UITextField alloc] initWithFrame:titleFrame];
+//    _sourceViewTitleField.hidden = YES;
+//    _sourceViewTitleField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+//    _sourceViewTitleField.autocorrectionType = UITextAutocorrectionTypeDefault;
+//    _sourceViewTitleField.autoresizingMask =  UIViewAutoresizingFlexibleWidth;
+//    _sourceViewTitleField.delegate = self;
+//    _sourceViewTitleField.accessibilityLabel = NSLocalizedString(@"Title", @"Post title");
+//    _sourceViewTitleField.returnKeyType = UIReturnKeyNext;
+//    [self addSubview:_sourceViewTitleField];
+//	[self startObservingTitleFieldChanges];
 }
 
 - (void)createSourceDividerViewWithFrame:(CGRect)frame
 {
     NSAssert(!_sourceContentDividerView, @"The source divider view must not exist when this method is called!");
     
-    CGFloat lineWidth = CGRectGetWidth(frame) - (2 * UITextFieldLeftRightInset);
-    _sourceContentDividerView = [[UIView alloc] initWithFrame:CGRectMake(UITextFieldLeftRightInset, CGRectGetMaxY(frame), lineWidth, CGRectGetHeight(frame))];
-    _sourceContentDividerView.backgroundColor = [UIColor lightGrayColor];
-    _sourceContentDividerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    _sourceContentDividerView.hidden = YES;
-
-    [self addSubview:_sourceContentDividerView];
+//    CGFloat lineWidth = CGRectGetWidth(frame) - (2 * UITextFieldLeftRightInset);
+//    _sourceContentDividerView = [[UIView alloc] initWithFrame:CGRectMake(UITextFieldLeftRightInset, CGRectGetMaxY(frame), lineWidth, CGRectGetHeight(frame))];
+//    _sourceContentDividerView.backgroundColor = [UIColor lightGrayColor];
+//    _sourceContentDividerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//    _sourceContentDividerView.hidden = YES;
+//
+//    [self addSubview:_sourceContentDividerView];
 }
 
 - (void)createSourceViewWithFrame:(CGRect)frame
@@ -1276,13 +1276,13 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     
     WPEditorField* newField = nil;
     
-    if ([fieldId isEqualToString:kWPEditorViewFieldTitleId]) {
+    /*if ([fieldId isEqualToString:kWPEditorViewFieldTitleId]) {
         NSAssert(!_titleField,
                  @"We should never have to set this twice.");
         
         _titleField = [[WPEditorField alloc] initWithId:fieldId webView:self.webView];
         newField = self.titleField;
-    } else if ([fieldId isEqualToString:kWPEditorViewFieldContentId]) {
+    } else */if ([fieldId isEqualToString:kWPEditorViewFieldContentId]) {
         NSAssert(!_contentField,
                  @"We should never have to set this twice.");
         
@@ -1463,6 +1463,9 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 - (void)insertLocalImage:(NSString*)url uniqueId:(NSString*)uniqueId
 {
+    NSLog(@"INSERTING LOCAL IMAGE: %@ %@", uniqueId, url);
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    NSLog(@"DATA %@", data);
     NSString *trigger = [NSString stringWithFormat:@"ZSSEditor.insertLocalImage(\"%@\", \"%@\");", uniqueId, url];
     [self.webView stringByEvaluatingJavaScriptFromString:trigger];
 }
